@@ -1,7 +1,8 @@
 function onEditIssues() {
-  var sheet = SpreadsheetApp.getActive().getSheetByName('Issues');
+  var sheet = SpreadsheetApp.getActive().getSheetByName('Open311ServiceRequest');
   var lastRow = sheet.getLastRow();
   var idName = "service-request" + lastRow;
+  sheet.getRange(lastRow, 1).setValue(idName);
   sheet.getRange(lastRow, 1).setValue(idName);
   var id = sheet.getRange(lastRow, 1).getValue();
   var description = sheet.getRange(lastRow, 2).getValue();
@@ -9,53 +10,75 @@ function onEditIssues() {
   var splitRow = location.indexOf(',');
   var latitude = location.slice(0, splitRow);
   var longitude = location.slice(splitRow + 1)
-  var media_url = sheet.getRange(lastRow, 4).getValue();
-  var service_code = sheet.getRange(lastRow, 5);
-  var service_name = sheet.getRange(lastRow, 6).getValue();
+  var name = sheet.getRange(lastRow, 4);
+  var mediaUrl = sheet.getRange(lastRow, 5).getValue();
+  var serviceCode = sheet.getRange(lastRow, 6);
+  var serviceName = sheet.getRange(lastRow, 7).getValue();
   var status = 'open';
-  var requested_datetime = sheet.getRange(lastRow, 6);
+  var requestedDatetime = sheet.getRange(lastRow, 9);
+  var address = sheet.getRange(lastRow, 10);
+  var agencyResPonsible = sheet.getRange(lastRow, 11);
+  var alternateName = sheet.getRange(lastRow, 12);
+  var areaServed = sheet.getRange(lastRow, 13);
+  var dataProvider = sheet.getRange(lastRow, 14);
+  var dateCreated = sheet.getRange(lastRow, 15);
+  var dateModified = sheet.getRange(lastRow, 16);
+  var deviceId = sheet.getRange(lastRow, 17);
+  var email = sheet.getRange(lastRow, 18);
+  var expectedDatetime = sheet.getRange(lastRow, 19);
+  var firstName = sheet.getRange(lastRow, 20);
+  var jurisdicrionId = sheet.getRange(lastRow, 21);
+  var lastName = sheet.getRange(lastRow, 22);
+  var owner = sheet.getRange(lastRow, 23);
+  var phone = sheet.getRange(lastRow, 24);
+  var seeAlso = sheet.getRange(lastRow, 25);
+  var serviceNotice = sheet.getRange(lastRow, 26);
+  var serviceRequestedId = sheet.getRange(lastRow, 27);
+  var source = sheet.getRange(lastRow, 28);
+  var statusNotes = sheet.getRange(lastRow, 29);
+  var updateDatetime = sheet.getRange(lastRow, 30);
   var postData = {
     "id": id,
     "type": "Open311ServiceRequest",
-    "address": "",
-    "agency_responsible": "",
-    "alternateName": "",
-    "areaServed": "",
-    "dataProvider": "",
-    "dateCreated": "",
-    "dateModified": "",
+    "address": address,
+    "agency_responsible": agencyResPonsible,
+    "alternateName": alternateName,
+    "areaServed": areaServed,
+    "dataProvider": dataProvider,
+    "dateCreated": dateCreated,
+    "dateModified": dateModified,
     "description": description,
-    "device_id": "",
-    "email": "",
-    "expected_datetime": "",
-    "first_name": "",
-    "jurisdiction_id": "",
-    "last_name": "",
+    "device_id": deviceId,
+    "email": email,
+    "expected_datetime": expectedDatetime,
+    "first_name": firstName,
+    "jurisdiction_id": jurisdicrionId,
+    "last_name": lastName,
     "location": {
       "type": "Point",
       "value": [ Number(latitude), Number(longitude)]
     },
     "media_url": {
       "type": "URL",
-      "value": media_url
+      "value": mediaUrl
     },
-    "name": "",
-    "phone": "",
+    "name": name,
+    "phone": phone,
     "requested_datetime": {
       "type": "DateTime",
-      "value": requested_datetime
+      "value": requestedDatetime
     },
-    "seeAlso": "",
-    "service_code": service_code,
-    "service_name": service_name,
-    "service_notice": "",
-    "service_request_id": "",
-    "source": "",
+    "seeAlso": seeAlso,
+    "service_code": serviceCode,
+    "service_name": serviceName,
+    "service_notice": serviceNotice,
+    "service_request_id": serviceRequestedId,
+    "source": source,
     "status": status,
-    "status_notes": "",
+    "status_notes": statusNotes,
     "updated_datetime": {
       "type": "DateTime",
-      "value": ""
+      "value": updateDatetime
     }
   }
   var options = {
