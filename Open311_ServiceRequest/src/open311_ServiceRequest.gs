@@ -1,5 +1,5 @@
 function onEditIssues() {
-  var sheet = SpreadsheetApp.getActive().getSheetByName('Issues');
+  var sheet = SpreadsheetApp.getActive().getSheetByName('Open311ServiceRequest');
   var lastRow = sheet.getLastRow();
   var idName = "service-request" + lastRow;
   sheet.getRange(lastRow, 1).setValue(idName);
@@ -9,11 +9,11 @@ function onEditIssues() {
   var splitRow = location.indexOf(',');
   var latitude = location.slice(0, splitRow);
   var longitude = location.slice(splitRow + 1)
-  var media_url = sheet.getRange(lastRow, 4).getValue();
-  var service_code = sheet.getRange(lastRow, 5);
-  var service_name = sheet.getRange(lastRow, 6).getValue();
+  var mediaUrl = sheet.getRange(lastRow, 4).getValue();
+  var serviceCode = sheet.getRange(lastRow, 5);
+  var serviceName = sheet.getRange(lastRow, 6).getValue();
   var status = 'open';
-  var requested_datetime = sheet.getRange(lastRow, 6);
+  var requestedDatetime = sheet.getRange(lastRow, 6);
   var postData = {
     "id": id,
     "type": "Open311ServiceRequest",
@@ -37,17 +37,17 @@ function onEditIssues() {
     },
     "media_url": {
       "type": "URL",
-      "value": media_url
+      "value": mediaUrl
     },
     "name": "",
     "phone": "",
     "requested_datetime": {
       "type": "DateTime",
-      "value": requested_datetime
+      "value": requestedDatetime
     },
     "seeAlso": "",
-    "service_code": service_code,
-    "service_name": service_name,
+    "service_code": serviceCode,
+    "service_name": serviceName,
     "service_notice": "",
     "service_request_id": "",
     "source": "",
